@@ -1,160 +1,146 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gửi Như Quỳnh ❤️</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gửi Như Quỳnh ❤️</title>
 
-  <style>
-    * { box-sizing: border-box; }
+<style>
+*{box-sizing:border-box}
 
-    body {
-      margin: 0;
-      background: black;
-      font-family: 'Segoe UI', sans-serif;
-      overflow: hidden;
-    }
+body{
+  margin:0;
+  background:black;
+  font-family:'Segoe UI',sans-serif;
+  overflow:hidden;
+}
 
-    /* NỀN SAO */
-    .stars {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);
-      background-size: 50px 40px;
-      animation: move 60s linear infinite;
-      z-index: 0;
-    }
+/* NỀN SAO */
+.stars{
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle,rgba(255,255,255,.18) 1px,transparent 1px);
+  background-size:45px 40px;
+  animation:move 80s linear infinite;
+  z-index:0;
+}
+@keyframes move{
+  from{background-position:0 0}
+  to{background-position:1200px 1200px}
+}
 
-    @keyframes move {
-      from { background-position: 0 0; }
-      to { background-position: 1000px 1000px; }
-    }
+/* FLOATING */
+.floating{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:1;
+}
+.floating span{
+  position:absolute;
+  font-size:clamp(14px,4vw,22px);
+  opacity:.85;
+  white-space:nowrap;
+  animation:float linear infinite;
+}
+@keyframes float{
+  from{transform:translateY(110vh) translateX(var(--x));opacity:0}
+  to{transform:translateY(-130vh) translateX(var(--x));opacity:1}
+}
 
-    /* TRUNG TÂM */
-    .center {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      z-index: 2;
-    }
+/* MÀU RIÊNG */
+.f1{color:#f90070}
+.f2{color:#7afcff}
+.f3{color:#ffd86f}
+.f4{color:#6d2ddc}
+.f5{color:#eb2f2f}
+.f6{color:#15e550}
+.f7{color:#f924dd}
+.f8{color:#22cdf4}
+.f9{color:#f58d0f}
+.f10{color:#ffffff}
 
-    /* ẢNH */
-    .avatar {
-      width: 320px;
-      height: 320px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid #ff7eb9;
-      box-shadow: 0 0 35px #ff7eb9;
-    }
+/* TRUNG TÂM */
+.center{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:16px;
+  z-index:2;
+}
 
-    h1 {
-      margin: 20px 0 15px;
-      font-size: 32px;
-      color: #ff7eb9;
-    }
+/* ẢNH */
+.avatar{
+  width:clamp(180px,65vw,320px);
+  aspect-ratio:1/1;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid #ff7eb9;
+  box-shadow:0 0 35px #ff7eb9;
+}
 
-    /* LOVE TEXT */
-    .love-text span {
-      display: block;
-      font-size: 24px;
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
+/* TIÊU ĐỀ */
+h1{
+  margin:16px 0 12px;
+  font-size:clamp(22px,6vw,32px);
+  color:#ff7eb9;
+}
 
-    .love-text .c1 { color: #ff7eb9; }
-    .love-text .c3 { color: #7f10ee; }
-    .love-text .c4 { color: #ec0a47; }
+/* NỘI DUNG */
+.love-text span{
+  display:block;
+  font-size:clamp(14px,4.5vw,20px);
+  line-height:1.5;
+  margin-bottom:10px;
+  font-weight:500;
+}
 
-    /* FLOATING */
-    .floating {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .floating span {
-      position: absolute;
-      font-size: 22px;
-      opacity: 0.75;
-      white-space: nowrap;
-      animation-name: float;
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
-    }
-
-    @keyframes float {
-      from {
-        transform: translateY(110vh) translateX(var(--x));
-        opacity: 0;
-      }
-      to {
-        transform: translateY(-130vh) translateX(var(--x));
-        opacity: 1;
-      }
-    }
-
-    /* MÀU RIÊNG CHO FLOATING */
-    .f1 { color: #f90070; } /* hồng */
-    .f2 { color: #7afcff; } /* xanh ngọc */
-    .f3 { color: #ffd86f; } /* vàng */
-    .f4 { color: #6d2ddc; } /* tím */
-    .f5 { color: #eb2f2f; } /* đỏ */
-    .f6 { color: #15e550; } /* xanh lá */
-    .f7 { color: #f924dd; } /* hồng nhạt */
-    .f8 { color: #22cdf4; } /* xanh biển */
-    .f9 { color: #f58d0f; } /* cam */
-    .f10{ color: #ffffff; } /* trắng */
-  </style>
+.c1{color:#ff7eb9}
+.c3{color:#7f10ee}
+.c4{color:#ec0a47}
+</style>
 </head>
 
 <body>
 
-  <div class="stars"></div>
+<div class="stars"></div>
 
-  <!-- FLOATING MỖI DÒNG 1 MÀU -->
-  <div class="floating">
-    <span class="f1"  style="left:5%;  --x:-20px; animation-delay:1s;  animation-duration:10s;">Như Quỳnh xinh đẹp 💖</span>
-    <span class="f2"  style="left:25%; --x:15px;  animation-delay:2s;  animation-duration:11s;">Như Quỳnh dễ thương 💗</span>
-    <span class="f3"  style="left:45%; --x:-10px; animation-delay:4s;  animation-duration:12s;">Như Quỳnh là Nhứt ✨</span>
-    <span class="f4"  style="left:65%; --x:20px;  animation-delay:6s;  animation-duration:10.5s;">Như Quỳnh mãi đỉnh 💕</span>
+<div class="floating">
+  <span class="f1" style="left:5%;--x:-20px;animation-delay:1s;animation-duration:11s">Như Quỳnh xinh đẹp 💖</span>
+  <span class="f2" style="left:25%;--x:15px;animation-delay:2s;animation-duration:12s">Như Quỳnh dễ thương 💗</span>
+  <span class="f3" style="left:45%;--x:-10px;animation-delay:4s;animation-duration:13s">Như Quỳnh là Nhứt ✨</span>
+  <span class="f4" style="left:65%;--x:20px;animation-delay:6s;animation-duration:11.5s">Như Quỳnh mãi đỉnh 💕</span>
+  <span class="f5" style="left:85%;--x:-25px;animation-delay:7s;animation-duration:12.5s">Cô tiên Như Quỳnh 💞</span>
+  <span class="f6" style="left:55%;--x:10px;animation-delay:0s;animation-duration:14s">Happy New Year 🎉</span>
+  <span class="f7" style="left:35%;--x:-15px;animation-delay:0s;animation-duration:12s">Thương Như Quỳnh nhiều lắm 💖</span>
+  <span class="f8" style="left:75%;--x:18px;animation-delay:0s;animation-duration:13s">Cười nhiều lên nha 😘</span>
+  <span class="f9" style="left:15%;--x:-12px;animation-delay:0s;animation-duration:15s">Tết này vui nha 🎊</span>
+  <span class="f10" style="left:50%;--x:-12px;animation-delay:0s;animation-duration:18s">Đánh đâu thắng đó♠️ ♥️ ♦️ ♣️</span>
+</div>
 
-    <span class="f5"  style="left:85%; --x:-25px; animation-delay:7s;  animation-duration:11.5s;">Cô tiên Như Quỳnh 💞</span>
-    <span class="f6"  style="left:55%; --x:10px;  animation-delay:0s;  animation-duration:12s;">Happy New Year 🎉</span>
-    <span class="f7"  style="left:65%; --x:-15px; animation-delay:0s;  animation-duration:10s;">Thương Như Quỳnh nhiều lắm 💖</span>
-    <span class="f8"  style="left:75%; --x:18px;  animation-delay:0s;  animation-duration:11s;">Cười nhiều lên nha 😘</span>
-    <span class="f9"  style="left:85%; --x:-12px; animation-delay:0s;  animation-duration:12.5s;">Tết này vui nha 🎊</span>
-    <span class="f10" style="left:35%; --x:-12px; animation-delay:0s;  animation-duration:16.5s;">Đánh đâu trúng đó ♠️♥️♦️♣️</span>
-  </div>
+<div class="center">
+  <img src="./nhuquynh.jpg" class="avatar" alt="avatar">
 
-  <div class="center">
-    <img src="./nhuquynh.jpg" class="avatar" alt="avatar" />
+  <h1>Gửi Nguyễn Thị Như Quỳnh ❤️</h1>
 
-    <h1>Gửi Nguyễn Thị Như Quỳnh ❤️</h1>
-
-    <p class="love-text">
-      <span class="c1">
-        Năm mới tuổi mới anh Bo chúc Như Quỳnh thật nhiều bình an và sức khỏe,
-        càng ngày xinh đẹp, gặp nhiều may mắn cầu gì được đó và thành công trong học tập hơn nhóe.💖💖💖💖
-      </span>
-      <span class="c3">
-        Chúc em và gia đình năm mới dồi dào sức khỏe,
-        an khang thịnh vượng trọn vẹn niềm vui và hạnh phúc yêu thương đong đầy. 💗💗💗
-      </span>
-      <span class="c4">
-        CHÚC MỪNG NĂM MỚI – HAPPY NEW YEAR 🎉🎉🎉🎉🎉
-      </span>
-    </p>
-  </div>
+  <p class="love-text">
+    <span class="c1">
+      Năm mới tuổi mới anh Bo chúc Như Quỳnh thật nhiều bình an và sức khỏe,
+      càng ngày xinh đẹp, gặp nhiều may mắn cầu gì được đó và thành công trong học tập hơn nhóe 💖
+    </span>
+    <span class="c3">
+      Chúc em và gia đình năm mới dồi dào sức khỏe,
+      an khang thịnh vượng trọn vẹn niềm vui và hạnh phúc 💗
+    </span>
+    <span class="c4">
+      CHÚC MỪNG NĂM MỚI – HAPPY NEW YEAR 🎉🎉🎉
+    </span>
+  </p>
+</div>
 
 </body>
 </html>
-
-
-
-
