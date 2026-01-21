@@ -1,210 +1,211 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Gửi Như Quỳnh ❤️</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Gửi Như Quỳnh ❤️</title>
 
-  <style>
-    * { box-sizing: border-box; }
+<style>
+* { box-sizing: border-box; }
 
-    body {
-      margin: 0;
-      background: black;
-      font-family: 'Segoe UI', sans-serif;
-      overflow: hidden;
+html, body {
+  width: 100%;
+  height: 100%;
+}
 
-      /* SAFE AREA iPhone NOTCH */
-      padding-top: env(safe-area-inset-top);
-      padding-bottom: env(safe-area-inset-bottom);
-      padding-left: env(safe-area-inset-left);
-      padding-right: env(safe-area-inset-right);
-    }
+body {
+  margin: 0;
+  background: black;
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
 
-    /* NỀN SAO */
-    .stars {
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);
-      background-size: 50px 40px;
-      animation: move 60s linear infinite;
-      z-index: 0;
-    }
+  /* Safe area iPhone notch */
+  padding: env(safe-area-inset-top)
+           env(safe-area-inset-right)
+           env(safe-area-inset-bottom)
+           env(safe-area-inset-left);
+}
 
-    @keyframes move {
-      from { background-position: 0 0; }
-      to { background-position: 1000px 1000px; }
-    }
+/* NỀN SAO */
+.stars {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,.15) 1px, transparent 1px);
+  background-size: 50px 40px;
+  animation: move 80s linear infinite;
+  z-index: 0;
+}
 
-    /* TRUNG TÂM */
-    .center {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      z-index: 2;
-      width: 90%;
-      max-width: 520px;
-    }
+@keyframes move {
+  from { background-position: 0 0; }
+  to   { background-position: 1500px 1500px; }
+}
 
-    /* ẢNH */
-    .avatar {
-      width: clamp(180px, 55vw, 320px);
-      aspect-ratio: 1 / 1;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid #ff7eb9;
-      box-shadow: 0 0 30px #ff7eb9;
-    }
+/* TRUNG TÂM */
+.center {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 2;
+  padding: 16px;
+}
 
-    h1 {
-      margin: 18px 0 12px;
-      font-size: clamp(20px, 6vw, 32px);
-      color: #ff7eb9;
-    }
+/* ẢNH */
+.avatar {
+  width: clamp(160px, 45vw, 300px);
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ff7eb9;
+  box-shadow: 0 0 25px #ff7eb9;
+}
 
-    /* LOVE TEXT */
-    .love-text span {
-      display: block;
-      font-size: clamp(14px, 4.5vw, 20px);
-      font-weight: 600;
-      margin-bottom: 10px;
-      line-height: 1.45;
-    }
+/* TIÊU ĐỀ */
+h1 {
+  margin: 16px 0 10px;
+  font-size: clamp(18px, 5vw, 30px);
+  color: #ff7eb9;
+}
 
-    .c1 { color: #ff7eb9; }
-    .c3 { color: #7f10ee; }
-    .c4 { color: #ec0a47; }
+/* NỘI DUNG */
+.love-text {
+  max-width: 520px;
+}
 
-    /* FLOATING */
-    .floating {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-    }
+.love-text span {
+  display: block;
+  font-size: clamp(14px, 4vw, 19px);
+  line-height: 1.5;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
 
-    .floating span {
-      position: absolute;
-      font-size: 22px;
-      opacity: 0.75;
-      white-space: nowrap;
-      animation: float linear infinite;
-      will-change: transform, opacity;
-    }
+/* MÀU */
+.c1 { color: #ff7eb9; }
+.c3 { color: #7f10ee; }
+.c4 { color: #ec0a47; }
 
-    @keyframes float {
-      from {
-        transform: translateY(110vh) translateX(var(--x));
-        opacity: 0;
-      }
-      to {
-        transform: translateY(-130vh) translateX(var(--x));
-        opacity: 1;
-      }
-    }
+/* FLOATING TEXT */
+.floating {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
 
-    /* MÀU RIÊNG CHO FLOATING */
-    .f1 { color: #ff0274; }
-    .f2 { color: #05fbff; }
-    .f3 { color: #febc08; }
-    .f4 { color: #6d2ddc; }
-    .f5 { color: #fb0909; }
-    .f6 { color: #38dff2; }
-    .f7 { color: #f309d4; }
-    .f8 { color: #03ccfa; }
-    .f9 { color: #ff8e04; }
-    .f10{ color: #52ff02; }
+.floating span {
+  position: absolute;
+  white-space: nowrap;
+  opacity: .75;
+  font-size: clamp(14px, 3.8vw, 22px);
+  animation: float linear infinite;
+  will-change: transform;
+}
 
-    /* TIM BAY */
-    .heart {
-      position: fixed;
-      font-size: 20px;
-      pointer-events: none;
-      animation: heart-fly 1.2s ease-out forwards;
-      will-change: transform, opacity;
-      z-index: 999;
-    }
+@keyframes float {
+  from {
+    transform: translateY(110vh) translateX(var(--x));
+    opacity: 0;
+  }
+  to {
+    transform: translateY(-140vh) translateX(var(--x));
+    opacity: 1;
+  }
+}
 
-    @keyframes heart-fly {
-      0% {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 1;
-      }
-      100% {
-        transform: translate(-50%, -120px) scale(1.6);
-        opacity: 0;
-      }
-    }
-  </style>
+/* MÀU FLOAT */
+.f1 { color:#ff0274 }
+.f2 { color:#05fbff }
+.f3 { color:#febc08 }
+.f4 { color:#6d2ddc }
+.f5 { color:#fb0909 }
+.f6 { color:#38dff2 }
+.f7 { color:#f309d4 }
+.f8 { color:#03ccfa }
+
+/* TIM BAY */
+.heart {
+  position: fixed;
+  font-size: 20px;
+  pointer-events: none;
+  animation: heart 1.2s ease-out forwards;
+  z-index: 999;
+}
+
+@keyframes heart {
+  0% { transform: translate(-50%,-50%) scale(1); opacity:1 }
+  100% { transform: translate(-50%,-120px) scale(1.6); opacity:0 }
+}
+
+/* TABLET */
+@media (min-width: 768px) {
+  .love-text span {
+    font-size: 18px;
+  }
+}
+
+/* PC */
+@media (min-width: 1024px) {
+  .avatar {
+    width: 280px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <div class="stars"></div>
+<div class="stars"></div>
 
-  <!-- FLOATING -->
-  <div class="floating">
-    <span class="f1"  style="left:25%; --x:-20px; animation-delay:2s;  animation-duration:9s;">Như Quỳnh xinh đẹp 💖</span>
-    <span class="f2"  style="left:25%; --x:15px;  animation-delay:0s;  animation-duration:10s;">Như Quỳnh dễ thương 💗</span>
-    <span class="f3"  style="left:45%; --x:-10px; animation-delay:0s;  animation-duration:11s;">Như Quỳnh là Nhứt ✨</span>
-    <span class="f4"  style="left:5%; --x:20px;  animation-delay:0s;  animation-duration:7s;">Như Quỳnh mãi đỉnh 💕</span>
+<!-- FLOATING -->
+<div class="floating">
+  <span class="f1" style="left:10%;--x:-20px;animation-duration:9s;">Như Quỳnh xinh đẹp 💖</span>
+  <span class="f2" style="left:30%;--x:10px;animation-duration:11s;">Như Quỳnh dễ thương 💗</span>
+  <span class="f3" style="left:50%;--x:-15px;animation-duration:12s;">Như Quỳnh là Nhứt ✨</span>
+  <span class="f4" style="left:70%;--x:15px;animation-duration:10s;">Như Quỳnh mãi đỉnh 💕</span>
+  <span class="f5" style="left:20%;--x:-10px;animation-duration:13s;">Thương nhiều lắm 💖</span>
+  <span class="f6" style="left:60%;--x:12px;animation-duration:14s;">Happy New Year 🎉</span>
+  <span class="f7" style="left:40%;--x:-8px;animation-duration:8s;">Cười nhiều nha 😘</span>
+  <span class="f8" style="left:80%;--x:10px;animation-duration:15s;">Tết vui nha 🎊</span>
+</div>
 
-    <span class="f5"  style="left:35%; --x:-25px; animation-delay:0s;  animation-duration:12.5s;">Cô tiên Như Quỳnh 💞</span>
-    <span class="f6"  style="left:55%; --x:10px;  animation-delay:0s;  animation-duration:12s;">Happy New Year 🎉</span>
-    <span class="f7"  style="left:15%; --x:-15px; animation-delay:0s;  animation-duration:8s;">Thương Như Quỳnh nhiều lắm 💖</span>
-    <span class="f8"  style="left:25%; --x:18px;  animation-delay:0s;  animation-duration:13s;">Cười nhiều lên nha 😘</span>
-    <span class="f9"  style="left:20%; --x:-12px; animation-delay:0s;  animation-duration:5s;">Tết này vui nha 🎊</span>
-    <span class="f10" style="left:25%; --x:-12px; animation-delay:0s;  animation-duration:6s;">Thương Như Quỳnh nhiều lắm 💖</span>
+<div class="center">
+  <img src="nhuquynh.jpg" class="avatar" alt="avatar">
+
+  <h1>Gửi Nguyễn Thị Như Quỳnh ❤️</h1>
+
+  <div class="love-text">
+    <span class="c1">
+      Năm mới tuổi mới anh Bo chúc Như Quỳnh thật nhiều bình an và sức khỏe,
+      càng ngày xinh đẹp, gặp nhiều may mắn và thành công hơn nha 💖
+    </span>
+    <span class="c3">
+      Chúc em và gia đình năm mới dồi dào sức khỏe,
+      an khang thịnh vượng và hạnh phúc 💗
+    </span>
+    <span class="c4">
+      CHÚC MỪNG NĂM MỚI – HAPPY NEW YEAR 🎉
+    </span>
   </div>
+</div>
 
-  <div class="center">
-    <img src="nhuquynh.jpg" class="avatar" alt="avatar" />
+<script>
+const hearts = ["💗","💖","💕","💞"];
 
-    <h1>Gửi Nguyễn Thị Như Quỳnh ❤️</h1>
-
-    <p class="love-text">
-      <span class="c1">
-        Năm mới tuổi mới anh Bo chúc Như Quỳnh thật nhiều bình an và sức khỏe,
-        càng ngày xinh đẹp, gặp nhiều may mắn cầu gì được đó và thành công trong học tập hơn nhóe.💖💖💖💖
-      </span>
-      <span class="c3">
-        Chúc em và gia đình năm mới dồi dào sức khỏe,
-        an khang thịnh vượng trọn vẹn niềm vui và hạnh phúc yêu thương đong đầy. 💗💗💗
-      </span>
-      <span class="c4">
-        CHÚC MỪNG NĂM MỚI – HAPPY NEW YEAR 🎉🎉🎉🎉🎉
-      </span>
-    </p>
-  </div>
-
-  <!-- JS TIM BAY -->
-  <script>
-    const hearts = ["💗","💖","💕","💞"];
-
-    document.addEventListener("pointerdown", e => {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-      heart.style.left = e.clientX + "px";
-      heart.style.top = e.clientY + "px";
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 1200);
-    });
-  </script>
+document.addEventListener("pointerdown", e => {
+  const h = document.createElement("div");
+  h.className = "heart";
+  h.textContent = hearts[Math.floor(Math.random()*hearts.length)];
+  h.style.left = e.clientX + "px";
+  h.style.top  = e.clientY + "px";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),1200);
+});
+</script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
