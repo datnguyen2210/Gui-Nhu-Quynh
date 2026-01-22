@@ -36,10 +36,9 @@ body {
 }
 
 #intro video {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  object-position: center center;
 }
 
 #skip {
@@ -70,7 +69,7 @@ body {
 
 @keyframes move {
   from { background-position: 0 0; }
-  to   { background-position: 1500px 1500px; }
+  to { background-position: 1500px 1500px; }
 }
 
 /* ================= TRUNG TÂM ================= */
@@ -86,6 +85,7 @@ body {
   padding: 16px;
 }
 
+/* ẢNH */
 .avatar {
   width: clamp(160px, 45vw, 300px);
   aspect-ratio: 1 / 1;
@@ -95,6 +95,7 @@ body {
   box-shadow: 0 0 25px #ff7eb9;
 }
 
+/* TEXT */
 h1 {
   margin: 16px 0 10px;
   font-size: clamp(18px, 5vw, 30px);
@@ -117,7 +118,7 @@ h1 {
 .c3 { color: #03ef85; }
 .c4 { color: #ec0a47; }
 
-/* ================= FLOAT TEXT ================= */
+/* FLOAT TEXT */
 .floating {
   position: fixed;
   inset: 0;
@@ -134,9 +135,10 @@ h1 {
 
 @keyframes float {
   from { transform: translateY(110vh); opacity:0 }
-  to   { transform: translateY(-140vh); opacity:1 }
+  to { transform: translateY(-140vh); opacity:1 }
 }
 
+/* MÀU FLOAT */
 .f1 { color:#ff0274 }
 .f2 { color:#05fbff }
 .f3 { color:#febc08 }
@@ -146,7 +148,7 @@ h1 {
 .f7 { color:#f309d4 }
 .f8 { color:#03ccfa }
 
-/* ================= HEART ================= */
+/* HEART */
 .heart {
   position: fixed;
   font-size: 30px;
@@ -156,37 +158,58 @@ h1 {
 }
 
 @keyframes heart {
-  0%   { transform: translate(-50%,-50%) scale(1); opacity:1 }
+  0% { transform: translate(-50%,-50%) scale(1); opacity:1 }
   100% { transform: translate(-50%,-120px) scale(1.6); opacity:0 }
 }
 
-/* ================= FIREWORK ================= */
+/* FIREWORK */
 #fireworks {
   position: fixed;
   inset: 0;
   z-index: 1;
   pointer-events: none;
 }
+
+ /* ===== INTRO VIDEO ===== */
+    #intro {
+      position: fixed;
+      inset: 0;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 1s ease;
+    }
+
+    #intro video {
+      width: 100vw;
+      height: 100vh;
+      object-fit: contain;      /* 🔥 KHÔNG CẮT VIDEO */
+      object-position: center;
+      background: black;
+    }
+
+    #intro.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
 </style>
 </head>
 
 <body>
 
-<!-- ================= VIDEO INTRO ================= -->
+<!-- VIDEO INTRO -->
 <div id="intro">
-  <video
-    id="introVideo"
-    autoplay
-    muted
-    playsinline
-    webkit-playsinline
-    preload="auto"
-  >
+  <video id="introVideo" autoplay muted playsinline>
     <source src="video.mp4" type="video/mp4">
   </video>
+  
 </div>
+ 
+  
 
-<!-- ================= MAIN CONTENT ================= -->
+<!-- MAIN CONTENT -->
 <div id="main-content">
 
 <audio id="bgm" loop>
@@ -207,7 +230,6 @@ h1 {
   <span class="f7" style="left:40%;--x:-8px;animation-duration:8s;">Cười nhiều lên nha 🎉</span>
   <span class="f8" style="left:80%;--x:10px;animation-duration:15s;">Tết vui vẻ 🎊</span>
 </div>
-
 
 <div class="center">
   <img src="nhuquynh.jpg" class="avatar">
@@ -234,12 +256,12 @@ h1 {
 /* ===== VIDEO TO MAIN ===== */
 const intro = document.getElementById("intro");
 const video = document.getElementById("introVideo");
-const main  = document.getElementById("main-content");
+const main = document.getElementById("main-content");
 const music = document.getElementById("bgm");
 
 function showMain(){
-  intro.style.transition = "opacity 1s ease";
   intro.style.opacity = "0";
+  intro.style.transition = "opacity 1s ease";
   setTimeout(()=>{
     intro.remove();
     main.style.display = "block";
@@ -250,14 +272,9 @@ function showMain(){
 video.addEventListener("ended", showMain);
 document.getElementById("skip").onclick = showMain;
 
-// iOS fallback
-document.addEventListener("touchstart",()=>{
-  if(video.paused) video.play().catch(()=>{});
-},{once:true});
-
 /* ===== HEART ===== */
 const hearts=["💗","💖","💕","💞"];
-addEventListener("pointerdown",e=>{
+document.addEventListener("pointerdown",e=>{
   const h=document.createElement("div");
   h.className="heart";
   h.textContent=hearts[Math.random()*hearts.length|0];
@@ -285,20 +302,17 @@ function fire(x,y){
     });
   }
 }
-
 function anim(){
   ctx.clearRect(0,0,c.width,c.height);
-  for(let i=ps.length-1;i>=0;i--){
-    const p=ps[i];
-    p.x+=p.vx; p.y+=p.vy; p.vy+=.05; p.life--;
+  ps.forEach((p,i)=>{
+    p.x+=p.vx;p.y+=p.vy;p.vy+=.05;p.life--;
     ctx.fillStyle=p.color;
-    ctx.beginPath(); ctx.arc(p.x,p.y,2,0,7); ctx.fill();
-    if(p.life<=0) ps.splice(i,1);
-  }
+    ctx.beginPath();ctx.arc(p.x,p.y,2,0,7);ctx.fill();
+    if(p.life<=0)ps.splice(i,1);
+  });
   requestAnimationFrame(anim);
 }
 anim();
-
 addEventListener("pointerdown",e=>fire(e.clientX,e.clientY));
 </script>
 
