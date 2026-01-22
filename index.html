@@ -33,24 +33,14 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: opacity 1s ease;
 }
 
 #intro video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-#skip {
-  position: absolute;
-  bottom: 30px;
-  right: 30px;
-  padding: 10px 18px;
-  border-radius: 20px;
-  border: 1px solid white;
-  background: rgba(0,0,0,.6);
-  color: white;
-  font-size: 14px;
+  width: 100vw;
+  height: 100vh;
+  object-fit: contain; /* KHÔNG CẮT VIDEO – HIỆN ĐỦ 2026 */
+  background: black;
 }
 
 #main-content {
@@ -85,7 +75,7 @@ body {
   padding: 16px;
 }
 
-/* ẢNH */
+/* AVATAR */
 .avatar {
   width: clamp(160px, 45vw, 300px);
   aspect-ratio: 1 / 1;
@@ -138,11 +128,11 @@ h1 {
   to { transform: translateY(-140vh); opacity:1 }
 }
 
-/* MÀU FLOAT */
+/* FLOAT COLORS */
 .f1 { color:#ff0274 }
 .f2 { color:#05fbff }
 .f3 { color:#febc08 }
-.f4 { color:#fffbfbe9 }
+.f4 { color:#ffffff }
 .f5 { color:#fb0909 }
 .f6 { color:#38dff2 }
 .f7 { color:#f309d4 }
@@ -167,33 +157,8 @@ h1 {
   position: fixed;
   inset: 0;
   z-index: 1;
-  pointer-events: none;
+  pointer-events: auto;
 }
-
- /* ===== INTRO VIDEO ===== */
-    #intro {
-      position: fixed;
-      inset: 0;
-      background: black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      transition: opacity 1s ease;
-    }
-
-    #intro video {
-      width: 100vw;
-      height: 100vh;
-      object-fit: contain;      /* 🔥 KHÔNG CẮT VIDEO */
-      object-position: center;
-      background: black;
-    }
-
-    #intro.hide {
-      opacity: 0;
-      pointer-events: none;
-    }
 </style>
 </head>
 
@@ -201,13 +166,10 @@ h1 {
 
 <!-- VIDEO INTRO -->
 <div id="intro">
-  <video id="introVideo" autoplay muted playsinline>
+  <video id="introVideo" autoplay muted playsinline webkit-playsinline preload="auto">
     <source src="video.mp4" type="video/mp4">
   </video>
-  
 </div>
- 
-  
 
 <!-- MAIN CONTENT -->
 <div id="main-content">
@@ -219,16 +181,15 @@ h1 {
 <div class="stars"></div>
 <canvas id="fireworks"></canvas>
 
-<!-- FLOATING -->
 <div class="floating">
-  <span class="f1" style="left:10%;--x:-20px;animation-duration:9s;">Như Quỳnh xinh đẹp 💖</span>
-  <span class="f2" style="left:30%;--x:10px;animation-duration:11s;">Như Quỳnh dễ thương 💗</span>
-  <span class="f3" style="left:50%;--x:-15px;animation-duration:12s;">Như Quỳnh là Nhứt ✨</span>
-  <span class="f4" style="left:45%;--x:15px;animation-duration:10s;">Như Quỳnh mãi đỉnh 💕</span>
-  <span class="f5" style="left:20%;--x:-10px;animation-duration:13s;">Thương Như Quỳnh nhiều lắm 💖</span>
-  <span class="f6" style="left:60%;--x:12px;animation-duration:14s;">Cô tiên Như Quỳnh 😘</span>
-  <span class="f7" style="left:40%;--x:-8px;animation-duration:8s;">Cười nhiều lên nha 🎉</span>
-  <span class="f8" style="left:80%;--x:10px;animation-duration:15s;">Tết vui vẻ 🎊</span>
+  <span class="f1" style="left:10%;animation-duration:9s;">Như Quỳnh xinh đẹp 💖</span>
+  <span class="f2" style="left:30%;animation-duration:11s;">Như Quỳnh dễ thương 💗</span>
+  <span class="f3" style="left:50%;animation-duration:12s;">Như Quỳnh là Nhứt ✨</span>
+  <span class="f4" style="left:45%;animation-duration:10s;">Như Quỳnh mãi đỉnh 💕</span>
+  <span class="f5" style="left:20%;animation-duration:13s;">Thương Như Quỳnh nhiều lắm 💖</span>
+  <span class="f6" style="left:60%;animation-duration:14s;">Cô tiên Như Quỳnh 😘</span>
+  <span class="f7" style="left:40%;animation-duration:8s;">Cười nhiều lên nha 🎉</span>
+  <span class="f8" style="left:80%;animation-duration:15s;">Tết vui vẻ 🎊</span>
 </div>
 
 <div class="center">
@@ -242,10 +203,10 @@ h1 {
     </span>
     <span class="c3">
       Chúc em và gia đình năm mới dồi dào sức khỏe,
-      an khang thịnh vượng và tràn đầy hạnh phúc💗💗💗💗
+      an khang thịnh vượng và tràn đầy hạnh phúc 💗💗💗💗
     </span>
     <span class="c4">
-      CHÚC MỪNG NĂM MỚI – HAPPY NEW YEAR🎉🎉🎉🎉
+      CHÚC MỪNG NĂM MỚI – HAPPY NEW YEAR 🎉🎉🎉🎉
     </span>
   </div>
 </div>
@@ -261,7 +222,7 @@ const music = document.getElementById("bgm");
 
 function showMain(){
   intro.style.opacity = "0";
-  intro.style.transition = "opacity 1s ease";
+  intro.style.pointerEvents = "none";
   setTimeout(()=>{
     intro.remove();
     main.style.display = "block";
@@ -270,30 +231,23 @@ function showMain(){
 }
 
 video.addEventListener("ended", showMain);
-document.getElementById("skip").onclick = showMain;
-
-/* ===== HEART ===== */
-const hearts=["💗","💖","💕","💞"];
-document.addEventListener("pointerdown",e=>{
-  const h=document.createElement("div");
-  h.className="heart";
-  h.textContent=hearts[Math.random()*hearts.length|0];
-  h.style.left=e.clientX+"px";
-  h.style.top=e.clientY+"px";
-  document.body.appendChild(h);
-  setTimeout(()=>h.remove(),1200);
-});
 
 /* ===== FIREWORK ===== */
-const c=document.getElementById("fireworks");
-const ctx=c.getContext("2d");
-function resize(){c.width=innerWidth;c.height=innerHeight}
-resize();addEventListener("resize",resize);
+const canvas = document.getElementById("fireworks");
+const ctx = canvas.getContext("2d");
 
-const ps=[];
+function resize(){
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+}
+resize();
+addEventListener("resize", resize);
+
+const particles = [];
+
 function fire(x,y){
   for(let i=0;i<30;i++){
-    ps.push({
+    particles.push({
       x,y,
       vx:(Math.random()-.5)*6,
       vy:(Math.random()-.7)*6,
@@ -302,18 +256,38 @@ function fire(x,y){
     });
   }
 }
-function anim(){
-  ctx.clearRect(0,0,c.width,c.height);
-  ps.forEach((p,i)=>{
-    p.x+=p.vx;p.y+=p.vy;p.vy+=.05;p.life--;
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach((p,i)=>{
+    p.x+=p.vx;
+    p.y+=p.vy;
+    p.vy+=0.05;
+    p.life--;
     ctx.fillStyle=p.color;
-    ctx.beginPath();ctx.arc(p.x,p.y,2,0,7);ctx.fill();
-    if(p.life<=0)ps.splice(i,1);
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,2,0,Math.PI*2);
+    ctx.fill();
+    if(p.life<=0) particles.splice(i,1);
   });
-  requestAnimationFrame(anim);
+  requestAnimationFrame(animate);
 }
-anim();
-addEventListener("pointerdown",e=>fire(e.clientX,e.clientY));
+animate();
+
+/* ===== CLICK: HEART + FIREWORK ===== */
+const hearts=["💗","💖","💕","💞"];
+
+document.addEventListener("pointerdown", e=>{
+  const h=document.createElement("div");
+  h.className="heart";
+  h.textContent=hearts[Math.random()*hearts.length|0];
+  h.style.left=e.clientX+"px";
+  h.style.top=e.clientY+"px";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),1200);
+
+  fire(e.clientX,e.clientY);
+});
 </script>
 
 </body>
