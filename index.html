@@ -18,7 +18,7 @@ body{
           env(safe-area-inset-left);
 }
 
-/* ===== TAP TO START (BẮT BUỘC CHO MOBILE) ===== */
+/* ===== TAP TO START (BẮT BUỘC CHO MOBILE) ===== */ /* ===== VIDEO ===== */
 #tapToStart{
   position:fixed;
   inset:0;
@@ -31,6 +31,102 @@ body{
   font-size:30px;
   text-align:center;
   cursor:pointer;
+}
+/* ===== ALBUM INTRO ===== */
+#album-intro{
+  position:fixed;
+  inset:0;
+  background:black;
+  z-index:9000;
+  display:none;
+}
+
+/* STARS */
+.stars{
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle,rgba(255,255,255,.15) 1px,transparent 1px);
+  background-size:50px 40px;
+  animation:move 90s linear infinite;
+}
+@keyframes move{
+  from{background-position:0 0}
+  to{background-position:1600px 1600px}
+}
+
+/* CENTER */
+.center{
+  position:fixed;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  perspective:1200px;
+}
+
+.album-title{
+  font-size:clamp(16px,4vw,20px);
+  margin-bottom:30px;
+  margin-top: 20px;   /* 👈 NHÍCH CHỮ LÊN */
+  color:#ff7eb9;
+  text-shadow:0 0 10px #ff7eb9;
+}
+
+/* ALBUM */
+.album-glow{
+  position:absolute;
+  width:280px;
+  height:280px;
+  border-radius:50%;
+  background:radial-gradient(circle,#ff7eb933 0%,transparent 70%);
+  filter:blur(12px);
+  animation:pulse 4s ease-in-out infinite;
+}
+@keyframes pulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.15)}
+}
+
+.carousel{
+  position:relative;
+  width:260px;
+  height:260px;
+  transform-style:preserve-3d;
+}
+.carousel img{
+  position:absolute;
+  width:180px;  
+  height:240px;
+  object-fit:cover;
+  border-radius:16px;
+  box-shadow:0 0 30px #ff7eb9;
+  left:40px;
+  top:10px;
+}
+.carousel img:nth-child(1){transform:rotateY(0deg) translateZ(280px)}
+.carousel img:nth-child(2){transform:rotateY(51deg) translateZ(280px)}
+.carousel img:nth-child(3){transform:rotateY(102deg) translateZ(280px)}
+.carousel img:nth-child(4){transform:rotateY(153deg) translateZ(280px)}
+.carousel img:nth-child(5){transform:rotateY(204deg) translateZ(280px)}
+.carousel img:nth-child(6){transform:rotateY(255deg) translateZ(280px)}
+.carousel img:nth-child(7){transform:rotateY(306deg) translateZ(280px)}
+
+h1{color:#ff7eb9;text-shadow:0 0 15px #ff7eb9}
+.tip{color:white;opacity:.7;margin-top:20px}
+
+/* HEART AUTO */
+.heart-album{
+  position:fixed;
+  font-size:30px;
+  pointer-events:none;
+  animation:heartAlbum 1.6s ease-out forwards;
+  z-index:9500;
+}
+@keyframes heartAlbum{
+  0%{transform:translate(-50%,0) scale(1);opacity:1}
+  100%{transform:translate(-50%,-180px) scale(1.7);opacity:0}
 }
 
 /* ===== INTRO VIDEO ===== */
@@ -163,6 +259,25 @@ h1{
 <!-- TAP TO START -->
 <div id="tapToStart">🎉💖 Đụng vào là phỏng tay đấy nhóe 💖🎉</div>
 
+<!-- ALBUM -->
+<div id="album-intro">
+  <div class="stars"></div>
+  <div class="center">
+    <div class="album-glow"></div>
+    <h1 class="album-title">Album của Như Quỳnh 💕</h1>
+    <div class="carousel" id="carousel">
+      <img src="1.jpg">
+      <img src="2.jpg">
+      <img src="3.jpg">
+      <img src="4.jpg">
+      <img src="5.jpg">
+      <img src="6.jpg">
+      <img src="7.jpg">
+    </div>
+
+  </div>
+</div>
+
 <!-- VIDEO INTRO -->
 <div id="intro">
   <video id="introVideo" playsinline muted>
@@ -214,20 +329,85 @@ h1{
 
 <script>
 const tap=document.getElementById("tapToStart");
+const album=document.getElementById("album-intro");
 const intro=document.getElementById("intro");
 const video=document.getElementById("introVideo");
 const main=document.getElementById("main-content");
 const music=document.getElementById("bgm");
 
-/* ===== UNLOCK AUDIO (CỰC QUAN TRỌNG) ===== */
+
+
+/* AUTO HEART */
+let heartTimer=null;
+const heart=["💖","💗","💕","💞","❤️"];
+
+function startHearts(){
+  heartTimer=setInterval(()=>{
+    const h=document.createElement("div");
+    h.className="heart-album";
+    h.textContent=hearts[Math.random()*hearts.length|0];
+    h.style.left=Math.random()*innerWidth+"px";
+    h.style.top=innerHeight+"px";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),1600);
+  },250);
+}
+function stopHearts(){
+  clearInterval(heartTimer);
+}
+
+/* START */
 tap.addEventListener("pointerdown",()=>{
   tap.remove();
+  album.style.display="block";
+  startHearts();
+  requestAnimationFrame(spin);
+});
 
+/* ===== UNLOCK AUDIO (CỰC QUAN TRỌNG) ===== */
+
+
+/* TAP → ALBUM */
+tap.addEventListener("pointerdown",()=>{
+  tap.remove();
+  album.style.display="block";
+  requestAnimationFrame(spin);
+  music.play().catch(()=>{});
+},{once:true});
+
+/* ALBUM ROTATE */
+const carousel=document.getElementById("carousel");
+let rot=0,last=null;
+function spin(t){
+  if(!last) last=t;
+  rot+=(t-last)*0.02;
+  carousel.style.transform=`rotateY(${rot}deg)`;
+  last=t;
+  requestAnimationFrame(spin);
+}
+requestAnimationFrame(spin);
+
+/* ALBUM → VIDEO */
+album.addEventListener("pointerdown",()=>{
+  album.remove();
   intro.classList.add("show");
   video.play();
-  music.play().catch(()=>{});
+});
 
-},{once:true});
+/* ===== HEART BAY TRONG ALBUM ===== */
+const albumHearts=["💖","💗","💕","💞","❤️"];
+
+album.addEventListener("pointerdown",e=>{
+  // tạo tim
+  const h=document.createElement("div");
+  h.className="heart-album";
+  h.textContent=albumHearts[Math.random()*albumHearts.length|0];
+  h.style.left=e.clientX+"px";
+  h.style.top=e.clientY+"px";
+  document.body.appendChild(h);
+
+  setTimeout(()=>h.remove(),1300);
+});
 
 /* ===== VIDEO END ===== */
 video.addEventListener("ended",()=>{
@@ -280,6 +460,8 @@ function anim(){
 }
 anim();
 addEventListener("pointerdown",e=>fire(e.clientX,e.clientY));
+
+
 </script>
 
 </body>
