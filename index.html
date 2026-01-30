@@ -68,7 +68,7 @@ body{
 }
 
 .album-title{
-  font-size:clamp(25px,4vw,30px);
+  font-size:clamp(25px,4vw,25px);
   font-family: 'Dancing Script', cursive;
   margin-bottom:50px;
   margin-top: 40px;   /* 👈 NHÍCH CHỮ LÊN */
@@ -107,15 +107,17 @@ body{
   left:40px;
   top:10px;
 }
-/* 360 / 8 = 45deg */
-.carousel img:nth-child(1){transform:rotateY(0deg) translateZ(280px)}
-.carousel img:nth-child(2){transform:rotateY(45deg) translateZ(280px)}
-.carousel img:nth-child(3){transform:rotateY(90deg) translateZ(280px)}
-.carousel img:nth-child(4){transform:rotateY(135deg) translateZ(280px)}
-.carousel img:nth-child(5){transform:rotateY(180deg) translateZ(280px)}
-.carousel img:nth-child(6){transform:rotateY(225deg) translateZ(280px)}
-.carousel img:nth-child(7){transform:rotateY(270deg) translateZ(280px)}
-.carousel img:nth-child(8){transform:rotateY(315deg) translateZ(280px)}
+/* 360 / 10 = 36deg */
+.carousel img:nth-child(1){transform:rotateY(0deg) translateZ(320px)}
+.carousel img:nth-child(2){transform:rotateY(36deg) translateZ(320px)}
+.carousel img:nth-child(3){transform:rotateY(72deg) translateZ(320px)}
+.carousel img:nth-child(4){transform:rotateY(108deg) translateZ(320px)}
+.carousel img:nth-child(5){transform:rotateY(144deg) translateZ(320px)}
+.carousel img:nth-child(6){transform:rotateY(180deg) translateZ(320px)}
+.carousel img:nth-child(7){transform:rotateY(216deg) translateZ(320px)}
+.carousel img:nth-child(8){transform:rotateY(252deg) translateZ(320px)}
+.carousel img:nth-child(9){transform:rotateY(288deg) translateZ(320px)}
+.carousel img:nth-child(10){transform:rotateY(324deg) translateZ(320px)}
 
 h1{color:#ff7eb9;text-shadow:0 0 15px #ff7eb9}
 .tip{color:white;opacity:.7;margin-top:20px}
@@ -280,6 +282,8 @@ h1{
       <img src="6.jpg">
       <img src="7.jpg">
       <img src="8.jpg">
+      <img src="9.jpg">
+      <img src="10.jpg">
     </div>
 
   </div>
@@ -473,5 +477,3 @@ addEventListener("pointerdown",e=>fire(e.clientX,e.clientY));
 
 </body>
 </html>
-
-
